@@ -1,30 +1,33 @@
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
-const simulation = new SolarSystemSimulation();
+const simulation = new SolarSystemSimulation("static/celestial_bodies.json");
 let time = new Date().getTime();
+let paused = false;
 
-simulation.addBody(new CelestialBody({ // "Sun" (not really)
-    mass: 1000000000,
-    radius: 5
-}));
+let resize = () => {
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
 
-simulation.addBody(new CelestialBody({ // The planet
-    mass: 100,
-    radius: 1,
-    initialVelocity: new Vector2(0, 5)
-}));
+    canvas.width = canvas.clientWidth * window.devicePixelRatio;
+    canvas.height = canvas.clientHeight * window.devicePixelRatio;
+}
+
+resize();
+window.addEventListener('resize', resize);
 
 let loop = () => {
-    context.fillStyle = '#aaa';
-    context.fillRect(0, 0, canvas.width, canvas.height);
-
     let nextTime = new Date().getTime();
     let elapsedTime = (nextTime - time) / 1000;
     time = nextTime;
 
-    simulation.update(elapsedTime);
-    simulation.render(context);
+    if (!simulation.paused && simulation.loaded) {
+        context.fillStyle = '#222';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        simulation.update(elapsedTime * simulation.timePerSecond);
+        simulation.render(context);
+    }
 
     window.requestAnimationFrame(loop);
 }

@@ -140,10 +140,6 @@ class Vector2 {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     }
 
-    getMagnitudeSqr() {
-        return this.x * this.x + this.y * this.y;
-    }
-
     project(v) {
         let dotProduct = this.x * v.x + this.y * v.y;
         let projectionAmount = dotProduct / (v.getMagnitude() * v.getMagnitude());
