@@ -1,9 +1,8 @@
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
-const simulation = new SolarSystemSimulation("static/celestial_bodies.json");
+const simulation = new SolarSystemSimulation("celestial_bodies.json");
 let time = new Date().getTime();
-let paused = false;
 
 let resize = () => {
     canvas.style.width = '100%';
