@@ -1,0 +1,6 @@
+{
+    "title": "Solar System Simulator",
+    "description": "This was a project I made for my physics class that accurately creates the solar system in a 2D simulation.",
+    "public": true,
+    "files": ["celestial_bodies.json", "index.css", "index.html", "index.js", "math.js", "simulation.js"]
+}
